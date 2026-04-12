@@ -46,7 +46,7 @@ a {
 .page-shell {
   width: min(1160px, calc(100% - 2rem));
   margin: 0 auto;
-  padding: 2rem 0 4rem;
+  padding: 0 0 4rem;
 }
 
 .hero {
@@ -55,6 +55,7 @@ a {
   gap: 2rem;
   align-items: center;
   min-height: 82vh;
+  padding-top: 2rem;
 }
 
 .eyebrow,
@@ -201,7 +202,7 @@ a {
 
 .stats-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: -3rem 0 4rem;
+  margin: 0 0 4rem;
 }
 
 .stat-card,
@@ -236,14 +237,11 @@ a {
   margin: 0.4rem 0 0.9rem;
 }
 
-.feature-grid,
-.pillar-grid {
+.feature-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.feature-card h3,
-.pillar-card h3,
-.shell-frame h3 {
+.feature-card h3 {
   margin-top: 0;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.3rem;
@@ -251,7 +249,7 @@ a {
 
 .split-layout {
   display: grid;
-  grid-template-columns: 1fr 360px;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   align-items: start;
 }
@@ -303,27 +301,10 @@ a {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.cta-banner {
-  margin-top: 5rem;
-  display: grid;
-  gap: 0.7rem;
-  text-align: center;
-  padding: 2rem;
-  background:
-    radial-gradient(circle at top left, rgba(201, 108, 61, 0.18), transparent 35%),
-    linear-gradient(135deg, rgba(255, 250, 242, 0.92), rgba(224, 240, 236, 0.88));
-}
-
-.cta-banner h2 {
-  margin: 0;
-  font-size: clamp(2rem, 4vw, 3.1rem);
-}
-
 @media (max-width: 960px) {
   .hero,
   .split-layout,
   .feature-grid,
-  .pillar-grid,
   .audience-list,
   .stats-grid {
     grid-template-columns: 1fr;

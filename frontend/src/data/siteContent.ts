@@ -29,23 +29,7 @@ export const milestones = [
 ];
 
 export const personas = [
-  'Tenants in Lagos, Abuja, and Port Harcourt who need credible rental history.',
+  'Tenants who need credible rental history they can carry between homes.',
   'Landlords who want clean payment visibility without manual proof collection.',
   'Agents vetting prospective tenants with something stronger than screenshots.',
 ];
-
-export const architecturePillars = [
-  {
-    title: 'Frontend',
-    body: 'React + TypeScript for the landing page now, with room for tenant and landlord dashboards next.',
-  },
-  {
-    title: 'Backend',
-    body: 'Node.js modules scaffolded for property APIs, profile endpoints, and Stellar payment services.',
-  },
-  {
-    title: 'Data model',
-    body: 'PostgreSQL holds off-chain metadata while Stellar remains the immutable source of payment truth.',
-  },
-];
-

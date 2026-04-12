@@ -1,32 +1,21 @@
 import { SectionHeading } from '../components/SectionHeading';
-import { ShellFrame } from '../components/ShellFrame';
 import { StatCard } from '../components/StatCard';
 import { TimelineStep } from '../components/TimelineStep';
-import {
-  architecturePillars,
-  featureCards,
-  milestones,
-  personas,
-  stats,
-} from '../data/siteContent';
+import { featureCards, milestones, personas, stats } from '../data/siteContent';
 
 export function LandingPage() {
   return (
     <main className="page-shell">
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">Drips Wave / Stellar MVP</p>
           <h1>Rent history tenants actually own.</h1>
           <p className="hero-text">
             RentProof turns monthly rent payments into verifiable on-chain receipts so tenants can
             carry trust from one apartment to the next.
           </p>
           <div className="hero-actions">
-            <a href="#architecture" className="button button-primary">
-              View architecture
-            </a>
             <a href="#features" className="button button-secondary">
-              Explore the MVP
+              Explore RentProof
             </a>
           </div>
         </div>
@@ -63,9 +52,9 @@ export function LandingPage() {
 
       <section id="features" className="content-section">
         <SectionHeading
-          eyebrow="Problem"
-          title="The product is simple because the problem is sharp."
-          description="Tenants in Nigeria often have no portable rental reputation, while landlords have no reliable way to verify payment consistency."
+          eyebrow="What it does"
+          title="A portable rent record for every reliable tenant."
+          description="RentProof gives landlords a clean payment trail and gives tenants a verified record they can reuse anywhere."
         />
         <div className="feature-grid">
           {featureCards.map((feature) => (
@@ -81,41 +70,14 @@ export function LandingPage() {
         <div>
           <SectionHeading
             eyebrow="Flow"
-            title="How the MVP works"
-            description="The goal is to move from property registration to a shareable rent profile with as little operational overhead as possible."
+            title="How it works"
+            description="The experience is designed to move from property registration to a shareable rent profile with as little friction as possible."
           />
           <ol className="timeline">
             {milestones.map((step, index) => (
               <TimelineStep key={step} index={index} text={step} />
             ))}
           </ol>
-        </div>
-        <ShellFrame
-          title="Core pages already scaffolded"
-          subtitle="Frontend structure"
-          items={[
-            'Landing page for deployment and product storytelling',
-            'Tenant dashboard placeholder',
-            'Landlord dashboard placeholder',
-            'Property setup placeholder',
-            'Public rent history profile placeholder',
-          ]}
-        />
-      </section>
-
-      <section id="architecture" className="content-section">
-        <SectionHeading
-          eyebrow="Architecture"
-          title="Set up for a fast MVP, not a bloated platform."
-          description="The repo separates frontend storytelling and UI from backend integration points so contributors can move in parallel."
-        />
-        <div className="pillar-grid">
-          {architecturePillars.map((pillar) => (
-            <article key={pillar.title} className="pillar-card">
-              <h3>{pillar.title}</h3>
-              <p>{pillar.body}</p>
-            </article>
-          ))}
         </div>
       </section>
 
@@ -132,14 +94,6 @@ export function LandingPage() {
             </article>
           ))}
         </div>
-      </section>
-
-      <section className="cta-banner">
-        <p>Project setup complete for the Wave sprint.</p>
-        <h2>Frontend is ready to deploy while the app flows are built out.</h2>
-        <a href="https://stellar.org" className="button button-primary">
-          Powered by Stellar
-        </a>
       </section>
     </main>
   );
