@@ -1,42 +1,82 @@
 # RentProof 🏠
 
-> **Your rent history, on-chain. Own your payment record — carry it anywhere.**
+**Your rent history, on-chain. Pay rent on Stellar, own your payment record, carry it anywhere.**
 
 ---
 
 ## The Problem
 
-In Lagos, renting a new apartment requires either a guarantor, a huge upfront deposit, or both. Landlords demand this because they have no way to verify whether a prospective tenant actually pays rent reliably. There's no credit history for renters in Nigeria. No tenant registry. No paper trail that a tenant owns and controls.
+In Lagos, finding a new apartment doesn't start with a viewing. It starts with a negotiation about trust.
 
-From the tenant's side, the problem is just as bad. Landlords collect cash or bank transfers and issue paper receipts — or nothing at all. When a dispute arises ("you missed two months"), the tenant has no clean proof. Bank statements help, but they require extra steps to obtain and don't tie payments to a specific property.
+Landlords in Nigeria demand one or two years of rent upfront — not because they're greedy, but because they have no way to know if you'll pay. There's no tenant credit system. No rental history database. No way for a prospective landlord to verify that the person sitting across from them has paid rent reliably for three years running. So they ask for everything at once, as insurance against a stranger they can't verify.
 
-The result: **tenants are always at a disadvantage**, and landlords who act in bad faith face no accountability.
+For the tenant, the math is brutal. A ₦500,000/year apartment suddenly requires ₦1,000,000 on the table before you get a key. Most people don't have that. They borrow from family, take predatory loans, or take whatever apartment they can afford upfront — not the one they actually want.
 
-RentProof solves this with a single, clear idea — every rent payment goes on-chain, and the tenant owns that record forever.
+And even tenants who do pay on time, every month, for years — have nothing to show for it. No document. No record. Just memories and a landlord's word, which means nothing to the next landlord they'll ever meet.
 
----
+**Good tenants are invisible. There is no system that rewards reliability.**
 
-## What It Does
+### Why Existing Solutions Don't Work
 
-RentProof is a simple web app where:
+Bank statements show transfers, but they don't say what the transfer was for — a landlord reviewing them has to trust the tenant's annotation. Paper receipts get lost, and many landlords don't issue them at all. Tenancy agreements exist but don't track payment history. WhatsApp payment screenshots can be faked.
 
-1. **A landlord registers a property** and sets the monthly rent amount.
-2. **A tenant links to the property** via a unique property code shared by the landlord.
-3. **The tenant pays rent** monthly through RentProof using USDC or XLM on Stellar.
-4. **Every payment is recorded on-chain** — timestamped, immutable, tied to the property address.
-5. **After 3+ months**, the tenant has a verifiable rent history they can share as a link with any future landlord — like a rental credit score, but one they fully own.
+None of these records belong to the tenant. None of them are portable. None of them are verifiable by a third party without trusting the tenant's word.
 
-No disputes module. No governance. No token. Just a permanent, tamper-proof receipt trail that belongs to the tenant.
+What's needed is a payment record that is created at the moment of payment, permanently attached to the tenant's identity, impossible to alter, and verifiable by anyone — without asking the previous landlord to cooperate.
 
 ---
 
-## Why Stellar
+## The Solution
 
-- **Immutability** — payments recorded on Stellar cannot be altered or deleted by either party.
-- **Low cost** — at ~$0.0007 per transaction, recording every monthly payment is essentially free.
-- **USDC on Stellar** — stable, dollar-pegged payments eliminate naira volatility concerns for landlords.
-- **No intermediary** — the tenant pays directly to the landlord's Stellar address. RentProof just witnesses and records it.
-- **Portable history** — because it's on-chain, the tenant's payment history exists independently of RentProof. Even if the app shuts down, the record lives on Stellar forever.
+RentProof is a simple web app where every rent payment goes through Stellar — creating a permanent, on-chain record that the tenant owns and can share with any future landlord as proof of reliability.
+
+1. A landlord registers a property and sets the monthly rent amount
+2. A tenant links to the property using a unique property code
+3. The tenant pays rent monthly through RentProof via USDC or XLM on Stellar
+4. Every payment is recorded on-chain — timestamped, immutable, tied to the property
+5. After a few months, the tenant has a **Rent History Profile**: a shareable public link showing their complete, verified payment record
+
+When applying for a new apartment, the tenant shares that link. The new landlord clicks it, sees the full history, and can verify every single transaction directly on the Stellar blockchain. No middleman. No document forgery possible. No need to call the previous landlord.
+
+---
+
+## The Rent History Profile
+
+**This is the product. Everything else exists to generate it.**
+
+```
+Tenant: Ade Bello
+──────────────────────────────────────────────────
+
+Property: 14B Ajao Estate, Lagos
+Period:   Jan 2024 – Dec 2024 (12 months)
+Status:   ✅ All 12 payments made on time
+
+Property: 3 Lekki Phase 1 Close, Lagos
+Period:   Jan 2025 – Present (16 months)
+Status:   ✅ All 16 payments made on time
+
+──────────────────────────────────────────────────
+Verified on Stellar · View transactions on Explorer →
+```
+
+A tenant who has paid reliably for two years can walk into any rental negotiation with this link and immediately change the dynamic. Instead of begging a landlord to trust them, they have proof. The landlord can reduce the upfront requirement. The tenant gets a fair shot.
+
+**This is what a rental credit system looks like when it's built on a public blockchain instead of a private database.**
+
+---
+
+## Why This Only Works on Stellar
+
+The Rent History Profile only works if the underlying records are trustworthy. That requires a ledger no single party controls.
+
+- **Immutability** — once a payment is recorded on Stellar, neither the tenant, landlord, nor RentProof can alter it. The record is neutral.
+- **Permanence** — the history lives on-chain regardless of what happens to RentProof. If the app shuts down tomorrow, every tenant's payment history still exists on the Stellar ledger forever.
+- **Verifiability** — any landlord can click a Stellar Explorer link and see the raw transaction. No trust in RentProof required.
+- **Low cost** — at ~$0.0007 per transaction, recording every monthly payment adds essentially zero overhead
+- **USDC on Stellar** — stable payments eliminate naira volatility for landlords collecting rent
+
+A tenant's Rent History Profile is only worth sharing if it can't be faked. Stellar is what makes it unfakeable.
 
 ---
 
@@ -44,42 +84,17 @@ No disputes module. No governance. No token. Just a permanent, tamper-proof rece
 
 | Feature | Description |
 |---|---|
-| Property Registration | Landlords register properties with rent amount and payment due date. |
-| Tenant Linking | Tenants connect to a property using a shareable code. |
-| Monthly Rent Payment | Tenants pay via USDC/XLM through RentProof. Payment goes directly to landlord's wallet. |
-| On-chain Receipt | Every payment is logged on Stellar with timestamp, amount, and property reference. |
-| Rent History Profile | Tenants get a public, shareable payment history URL — their proof of reliability. |
-| Landlord Dashboard | Landlords see payment status for each property at a glance. |
-| Tenant Dashboard | Tenants see their full history across all properties they've ever rented. |
+| Property Registration | Landlords register properties with rent amount and due date. |
+| Tenant Linking | Tenants connect to a property via a shareable property code. |
+| Monthly Rent Payment | Tenants pay via USDC/XLM. Payment goes directly to landlord's wallet. |
+| On-chain Receipt | Every payment logged on Stellar with timestamp, amount, and property reference. |
+| Rent History Profile | Public, shareable page showing verified payment history across all properties. |
+| Landlord Dashboard | Payment status per property at a glance. |
+| Tenant Dashboard | Full payment history across all past and current rentals. |
 
 ---
 
-## The Rent History Profile
-
-The most important feature in RentProof is the **Rent History Profile** — a clean, shareable page that shows:
-
-```
-Tenant: Ade Bello
-──────────────────────────────────────────
-Property: 14B Ajao Estate, Lagos
-Period:   Jan 2024 – Dec 2024 (12 months)
-Status:   ✅ All payments made on time
-
-Property: 3 Lekki Phase 1 Close, Lagos
-Period:   Jan 2025 – Present (15 months)
-Status:   ✅ All payments made on time
-──────────────────────────────────────────
-Verified on Stellar · Last updated: April 2026
-[View on Stellar Explorer →]
-```
-
-When a tenant is applying for a new apartment, they share this link. The new landlord clicks it, sees the history, and can verify every payment transaction directly on the Stellar blockchain. No middleman. No document forgery possible.
-
-This profile is the product. Everything else exists to generate it.
-
----
-
-## How It Works (Technical Flow)
+## How It Works
 
 ```
 Tenant → RentProof App → Stellar Payment (USDC/XLM) → Landlord Wallet
@@ -88,10 +103,12 @@ Tenant → RentProof App → Stellar Payment (USDC/XLM) → Landlord Wallet
                                   ↓
                     Horizon API indexes the transaction
                                   ↓
-                    RentProof reads it → updates Rent History Profile
+                    RentProof updates Rent History Profile
+                                  ↓
+                    Tenant shares profile link with next landlord
 ```
 
-RentProof uses Stellar's **memo field** to tag each payment with a property identifier. This means the payment record on-chain is self-describing — even without RentProof's database, anyone can read the Stellar ledger and reconstruct a tenant's history.
+RentProof uses Stellar's **memo field** to tag each payment with a property identifier. The payment record on-chain is self-describing — even without RentProof's database, anyone can reconstruct a tenant's full history directly from the Stellar ledger.
 
 ---
 
@@ -103,8 +120,8 @@ RentProof uses Stellar's **memo field** to tag each payment with a property iden
 | Payments | USDC on Stellar, XLM |
 | Frontend | TypeScript + React |
 | Backend | Node.js + Stellar SDK |
-| Database | PostgreSQL (off-chain metadata: property details, tenant profiles, property codes) |
-| History Profile | Server-rendered public page — no login required to view |
+| Database | PostgreSQL (off-chain metadata: property details, tenant profiles) |
+| History Profile | Public server-rendered page — no login required to view |
 
 ---
 
@@ -115,17 +132,17 @@ rentproof/
 ├── frontend/
 │   ├── src/
 │   │   ├── pages/
-│   │   │   ├── TenantDashboard.tsx      # Tenant's payment history + pay button
-│   │   │   ├── LandlordDashboard.tsx    # Property list + payment status
-│   │   │   ├── RentHistoryProfile.tsx   # Public shareable profile page
-│   │   │   └── PropertySetup.tsx        # Landlord registers a property
+│   │   │   ├── TenantDashboard.tsx
+│   │   │   ├── LandlordDashboard.tsx
+│   │   │   ├── RentHistoryProfile.tsx   # The shareable public profile
+│   │   │   └── PropertySetup.tsx
 │   │   └── components/
 ├── backend/
 │   ├── src/
 │   │   ├── stellar/
-│   │   │   ├── payments.ts              # Send + verify payments via Stellar SDK
-│   │   │   ├── history.ts               # Read + reconstruct history from Horizon
-│   │   │   └── accounts.ts              # Wallet management
+│   │   │   ├── payments.ts
+│   │   │   ├── history.ts               # Reconstruct history from Horizon
+│   │   │   └── accounts.ts
 │   │   └── routes/
 │   │       ├── properties.ts
 │   │       ├── tenants.ts
@@ -135,50 +152,26 @@ rentproof/
 
 ---
 
-## MVP Scope (Wave Sprint)
+## Roadmap
 
-For the initial Wave contribution, the MVP focuses on:
-
+- [x] Project concept and architecture
+- [x] Landing page deployed
 - [ ] Property registration (landlord flow)
 - [ ] Tenant-to-property linking via property code
-- [ ] Stellar payment with memo tagging (tenant flow)
-- [ ] Horizon listener — read and index payments per property
-- [ ] Tenant dashboard (history view)
-- [ ] Basic public Rent History Profile page (shareable link)
-
-Post-MVP additions (future waves):
-- Landlord verification badge (optional KYC layer)
-- Late payment flagging (paid but after due date — still recorded, but noted)
-- Naira on-ramp via local payment gateway → USDC
-- WhatsApp/SMS rent reminders
-- RentProof score — a simple reliability metric based on payment consistency
-
----
-
-## Target Users
-
-- **Tenants** in Nigerian cities (Lagos, Abuja, Port Harcourt) who want to build and own a rental reputation
-- **Landlords** who want consistent payment records without chasing bank alerts
-- **Real estate agents** who want a quick way to vet prospective tenants
-- **Young professionals** who are renting for the first time and have no guarantors
-
----
-
-## Why This Matters
-
-Nigeria has no functional credit bureau for renters. The closest thing most tenants have is a WhatsApp message from a previous landlord — which can be faked, ignored, or simply never given. This means every new tenancy starts from zero trust, and tenants with genuinely good payment history have no way to prove it.
-
-RentProof creates that proof layer. It doesn't require landlords to trust the app — they can verify every transaction directly on the Stellar blockchain. And it doesn't require tenants to trust that RentProof will be around forever — their history lives on-chain regardless.
-
-A tenant who has paid rent reliably for two years deserves to walk into their next rental negotiation with leverage. RentProof gives them that.
+- [ ] Stellar payment with memo tagging
+- [ ] Horizon payment listener and indexer
+- [ ] Tenant dashboard
+- [ ] Public Rent History Profile page
+- [ ] Landlord dashboard
+- [ ] Late payment detection and flagging
+- [ ] WhatsApp/SMS rent reminders
+- [ ] Naira on-ramp integration
 
 ---
 
 ## Contributing
 
-This project is part of the Stellar Wave Program on Drips. Contributions are welcome — check the Issues tab for open tasks tagged `good-first-issue`, `frontend`, `backend`, and `stellar-integration`.
-
-Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before opening a PR.
+This project is part of the Stellar Wave Program on Drips. Contributions are welcome — check the Issues tab for open tasks.
 
 ---
 

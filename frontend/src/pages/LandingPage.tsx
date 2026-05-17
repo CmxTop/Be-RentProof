@@ -8,10 +8,11 @@ export function LandingPage() {
     <main className="page-shell">
       <section className="hero">
         <div className="hero-copy">
-          <h1>Rent history tenants actually own.</h1>
+          <h1>Your rent history, on-chain.</h1>
           <p className="hero-text">
-            RentProof turns monthly rent payments into verifiable on-chain receipts so tenants can
-            carry trust from one apartment to the next.
+            Pay rent on Stellar, own your payment record, carry it anywhere. RentProof turns every
+            rent payment into permanent, verifiable proof that tenants control and future landlords
+            can trust.
           </p>
           <div className="hero-actions">
             <a href="#features" className="button button-secondary">
@@ -34,7 +35,7 @@ export function LandingPage() {
             </div>
             <div className="receipt-row">
               <span>3 Lekki Phase 1 Close</span>
-              <strong>15/15 paid</strong>
+              <strong>16/16 paid</strong>
             </div>
             <div className="receipt-footer">
               <span>Verified on Stellar</span>
@@ -52,9 +53,9 @@ export function LandingPage() {
 
       <section id="features" className="content-section">
         <SectionHeading
-          eyebrow="What it does"
-          title="A portable rent record for every reliable tenant."
-          description="RentProof gives landlords a clean payment trail and gives tenants a verified record they can reuse anywhere."
+          eyebrow="The Solution"
+          title="A permanent, on-chain record that tenants own."
+          description="RentProof creates verifiable payment history that belongs to the tenant — not the landlord, not the app. Every payment is recorded on Stellar, impossible to alter, and portable across any future rental."
         />
         <div className="feature-grid">
           {featureCards.map((feature) => (
@@ -83,9 +84,9 @@ export function LandingPage() {
 
       <section className="content-section audience-section">
         <SectionHeading
-          eyebrow="Users"
-          title="Built for renters who start every negotiation from zero trust."
-          description="RentProof gives credible payment proof to the people who usually have the least leverage in the rental process."
+          eyebrow="Target Users"
+          title="Built for tenants who start every negotiation from zero trust."
+          description="RentProof gives credible payment proof to the people who usually have the least leverage in the rental process — turning invisible reliability into verifiable reputation."
         />
         <div className="audience-list">
           {personas.map((persona) => (
