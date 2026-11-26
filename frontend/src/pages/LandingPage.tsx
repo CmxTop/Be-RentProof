@@ -28,13 +28,13 @@ export function LandingPage() {
           </div>
           <div className="receipt-card">
             <p className="receipt-label">Rent History Profile</p>
-            <h2>Ade Bello</h2>
+            <h2>J. Rivera</h2>
             <div className="receipt-row">
-              <span>14B Ajao Estate</span>
+              <span>Unit 14B, Riverside Apartments</span>
               <strong>12/12 paid</strong>
             </div>
             <div className="receipt-row">
-              <span>3 Lekki Phase 1 Close</span>
+              <span>Unit 3, Harbor View Close</span>
               <strong>16/16 paid</strong>
             </div>
             <div className="receipt-footer">

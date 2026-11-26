@@ -31,7 +31,7 @@ export const milestones = [
 ];
 
 export const personas = [
-  'Tenants in Nigerian cities who want to build and own a rental reputation.',
+  'Tenants anywhere who want to build and own a portable rental reputation.',
   'Landlords who want consistent payment records without chasing bank alerts.',
   'Real estate agents who want a quick way to vet prospective tenants.',
   'Young professionals renting for the first time with no guarantors.',
