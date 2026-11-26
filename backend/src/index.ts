@@ -1,12 +1,9 @@
-import { getProfileRoute } from './routes/profile';
-import { getPropertiesRoute } from './routes/properties';
-import { getTenantsRoute } from './routes/tenants';
+import { createServer } from './server';
 
-export const appModules = {
-  properties: getPropertiesRoute(),
-  tenants: getTenantsRoute(),
-  profile: getProfileRoute(),
-};
+const PORT = Number(process.env.PORT ?? 4000);
 
-console.log('RentProof backend scaffold ready', Object.keys(appModules));
+const app = createServer();
 
+app.listen(PORT, () => {
+  console.log(`RentProof backend listening on http://localhost:${PORT}`);
+});
