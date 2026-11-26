@@ -6,11 +6,11 @@
 
 ## The Problem
 
-In Lagos, finding a new apartment doesn't start with a viewing. It starts with a negotiation about trust.
+In most rental markets, finding a new apartment doesn't start with a viewing. It starts with a negotiation about trust.
 
-Landlords in Nigeria demand one or two years of rent upfront — not because they're greedy, but because they have no way to know if you'll pay. There's no tenant credit system. No rental history database. No way for a prospective landlord to verify that the person sitting across from them has paid rent reliably for three years running. So they ask for everything at once, as insurance against a stranger they can't verify.
+Landlords in many countries demand several months — sometimes a full year or two — of rent upfront, not because they're greedy, but because they have no way to know if you'll pay. There's no tenant credit system. No rental history database. No way for a prospective landlord to verify that the person sitting across from them has paid rent reliably for years running. So they ask for everything at once, as insurance against a stranger they can't verify. This is especially acute in markets like Nigeria, where upfront demands of one or two years' rent are common — but the underlying problem, a missing rental credit history, shows up anywhere formal credit systems don't reach renters.
 
-For the tenant, the math is brutal. A ₦500,000/year apartment suddenly requires ₦1,000,000 on the table before you get a key. Most people don't have that. They borrow from family, take predatory loans, or take whatever apartment they can afford upfront — not the one they actually want.
+For the tenant, the math is brutal. A year's rent suddenly requires two years' worth on the table before you get a key. Most people don't have that. They borrow from family, take predatory loans, or take whatever apartment they can afford upfront — not the one they actually want.
 
 And even tenants who do pay on time, every month, for years — have nothing to show for it. No document. No record. Just memories and a landlord's word, which means nothing to the next landlord they'll ever meet.
 
@@ -45,14 +45,14 @@ When applying for a new apartment, the tenant shares that link. The new landlord
 **This is the product. Everything else exists to generate it.**
 
 ```
-Tenant: Ade Bello
+Tenant: J. Rivera
 ──────────────────────────────────────────────────
 
-Property: 14B Ajao Estate, Lagos
+Property: Unit 14B, Riverside Apartments
 Period:   Jan 2024 – Dec 2024 (12 months)
 Status:   ✅ All 12 payments made on time
 
-Property: 3 Lekki Phase 1 Close, Lagos
+Property: Unit 3, Harbor View Close
 Period:   Jan 2025 – Present (16 months)
 Status:   ✅ All 16 payments made on time
 
@@ -74,7 +74,7 @@ The Rent History Profile only works if the underlying records are trustworthy. T
 - **Permanence** — the history lives on-chain regardless of what happens to RentProof. If the app shuts down tomorrow, every tenant's payment history still exists on the Stellar ledger forever.
 - **Verifiability** — any landlord can click a Stellar Explorer link and see the raw transaction. No trust in RentProof required.
 - **Low cost** — at ~$0.0007 per transaction, recording every monthly payment adds essentially zero overhead
-- **USDC on Stellar** — stable payments eliminate naira volatility for landlords collecting rent
+- **USDC on Stellar** — stable payments eliminate local-currency volatility for landlords collecting rent, anywhere in the world
 
 A tenant's Rent History Profile is only worth sharing if it can't be faked. Stellar is what makes it unfakeable.
 
@@ -165,13 +165,13 @@ rentproof/
 - [ ] Landlord dashboard
 - [ ] Late payment detection and flagging
 - [ ] WhatsApp/SMS rent reminders
-- [ ] Naira on-ramp integration
+- [ ] Local-currency on-ramp integrations
 
 ---
 
 ## Contributing
 
-This project is part of the Stellar Wave Program on Drips. Contributions are welcome — check the Issues tab for open tasks.
+Contributions are welcome — check the Issues tab on this repo for open tasks, or open a PR.
 
 ---
 
@@ -181,4 +181,4 @@ MIT License — see [LICENSE](./LICENSE) for details.
 
 ---
 
-*Built on [Stellar](https://stellar.org) · Part of the [Drips Wave Program](https://drips.network/wave/stellar)*
+*Built on [Stellar](https://stellar.org)*
