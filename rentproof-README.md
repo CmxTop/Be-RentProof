@@ -118,10 +118,38 @@ RentProof uses Stellar's **memo field** to tag each payment with a property iden
 |---|---|
 | Blockchain | Stellar (Horizon API, Stellar SDK) |
 | Payments | USDC on Stellar, XLM |
-| Frontend | TypeScript + React |
-| Backend | Node.js + Stellar SDK |
-| Database | PostgreSQL (off-chain metadata: property details, tenant profiles) |
-| History Profile | Public server-rendered page — no login required to view |
+| Frontend | TypeScript + React + Vite, react-router |
+| Backend | Node.js + Express + Stellar SDK |
+| Database | SQLite for MVP simplicity (off-chain metadata only; schema is plain relational SQL, portable to PostgreSQL for production) |
+| Signing | Freighter wallet extension; a Testnet demo-account fallback is available for trying the flow without installing it |
+| History Profile | Public client-rendered page — no login required to view |
+
+---
+
+## Running Locally
+
+Everything currently runs against the **Stellar Testnet**.
+
+```bash
+# install workspace dependencies
+npm install
+
+# terminal 1 — backend (Express + SQLite, http://localhost:4000)
+npm run dev --workspace backend
+
+# terminal 2 — frontend (Vite, http://localhost:5173)
+npm run dev --workspace frontend
+```
+
+Try the flow:
+
+1. Go to `/property/setup`, connect a Stellar wallet address, and register a property. **The landlord's wallet address must already exist on Testnet** (e.g. a Freighter Testnet account, or one funded via [Friendbot](https://friendbot.stellar.org/)) — Stellar payment operations require the destination account to exist.
+2. Copy the generated property code.
+3. Go to `/tenant`, link to the property with that code.
+4. Pay with Freighter (Testnet), or use the "pay with a demo Testnet account" fallback if you don't have the extension installed.
+5. Open `/profile/:propertyCode` — the payment appears once the backend's Horizon poller indexes it (a few seconds).
+
+Run backend tests with `npm run test --workspace backend`.
 
 ---
 
@@ -132,20 +160,30 @@ rentproof/
 ├── frontend/
 │   ├── src/
 │   │   ├── pages/
-│   │   │   ├── TenantDashboard.tsx
-│   │   │   ├── LandlordDashboard.tsx
+│   │   │   ├── TenantDashboard.tsx      # Link to a property, pay rent
+│   │   │   ├── LandlordDashboard.tsx    # View properties + payments received
 │   │   │   ├── RentHistoryProfile.tsx   # The shareable public profile
-│   │   │   └── PropertySetup.tsx
-│   │   └── components/
+│   │   │   └── PropertySetup.tsx        # Register a property, get a code
+│   │   ├── lib/
+│   │   │   ├── api.ts                   # Backend fetch wrapper
+│   │   │   └── stellar.ts               # Freighter connect/sign helpers
+│   │   └── router.tsx
 ├── backend/
 │   ├── src/
+│   │   ├── db/
+│   │   │   ├── schema.ts                # SQLite table definitions
+│   │   │   └── client.ts
 │   │   ├── stellar/
-│   │   │   ├── payments.ts
+│   │   │   ├── horizon.ts               # Shared Testnet Horizon client
+│   │   │   ├── payments.ts              # Build/submit payment transactions
 │   │   │   ├── history.ts               # Reconstruct history from Horizon
-│   │   │   └── accounts.ts
+│   │   │   ├── poller.ts                # Interval Horizon indexer
+│   │   │   └── accounts.ts              # Demo-mode Testnet account helper
 │   │   └── routes/
+│   │       ├── landlords.ts
 │   │       ├── properties.ts
 │   │       ├── tenants.ts
+│   │       ├── payments.ts
 │   │       └── profile.ts               # Public profile endpoint
 └── README.md
 ```
@@ -156,13 +194,14 @@ rentproof/
 
 - [x] Project concept and architecture
 - [x] Landing page deployed
-- [ ] Property registration (landlord flow)
-- [ ] Tenant-to-property linking via property code
-- [ ] Stellar payment with memo tagging
-- [ ] Horizon payment listener and indexer
-- [ ] Tenant dashboard
-- [ ] Public Rent History Profile page
-- [ ] Landlord dashboard
+- [x] Property registration (landlord flow)
+- [x] Tenant-to-property linking via property code
+- [x] Stellar payment with memo tagging (Testnet, Freighter + demo-mode fallback)
+- [x] Horizon payment listener and indexer
+- [x] Tenant dashboard
+- [x] Public Rent History Profile page
+- [x] Landlord dashboard
+- [ ] Mainnet support
 - [ ] Late payment detection and flagging
 - [ ] WhatsApp/SMS rent reminders
 - [ ] Local-currency on-ramp integrations

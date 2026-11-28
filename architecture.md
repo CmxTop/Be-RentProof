@@ -95,15 +95,15 @@ RentProff/
 
 ## Implementation Notes
 
-- The landing page is intentionally isolated from app logic so it can be deployed immediately.
-- Placeholder app pages are included to make contributor onboarding easier.
-- Backend modules are scaffolded with typed entry points to reflect the README's intended implementation path.
-- The structure is optimized for Wave MVP delivery first, then iterative expansion in later sprints.
+- The MVP flow described above is implemented end-to-end against the Stellar Testnet: property registration, tenant linking by code, Stellar payment with memo tagging (via Freighter, or a labeled demo-mode Testnet account for trying the flow without the extension), a Horizon-backed indexing poller, and real data on both dashboards and the public Rent History Profile page.
+- The off-chain store is SQLite rather than PostgreSQL for MVP simplicity. The schema (`backend/src/db/schema.ts`) is plain relational SQL with no SQLite-specific features, so moving to PostgreSQL is a localized change to the DB client, not a data-model rewrite.
+- There is no auth layer yet — "login" is just supplying a Stellar wallet address, which is sufficient for a public, wallet-identified rent history product but will need real wallet-signature verification before any sensitive write path is exposed beyond a local demo.
+- Horizon indexing is a simple interval poller, not a stream — fine at MVP scale, worth revisiting for latency at real scale.
 
 ## Next Build Steps
 
-- add routing and auth state for landlord and tenant flows
-- implement property registration and tenant linking forms
-- add backend API handlers and PostgreSQL models
-- integrate Stellar SDK payment creation and Horizon history indexing
-- render real tenant profile data through a server-backed public page
+- verify wallet ownership via a signed challenge instead of a freely-typed address, before this goes beyond a demo
+- move off-chain storage from SQLite to PostgreSQL for concurrent/production use
+- replace interval polling with Horizon's streaming (SSE) API for near-instant indexing
+- late payment detection/flagging and reminder notifications
+- mainnet support once the Testnet flow has been exercised further
