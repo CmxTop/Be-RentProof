@@ -17,6 +17,15 @@ export const createLandlordsRouter = (db: Database.Database): Router => {
       return;
     }
 
+    const existing = db
+      .prepare('SELECT id FROM landlords WHERE wallet_address = ?')
+      .get(parsed.data.walletAddress) as { id: string } | undefined;
+
+    if (existing) {
+      res.status(200).json({ id: existing.id, walletAddress: parsed.data.walletAddress });
+      return;
+    }
+
     const id = randomUUID();
     db.prepare('INSERT INTO landlords (id, wallet_address) VALUES (?, ?)').run(id, parsed.data.walletAddress);
 

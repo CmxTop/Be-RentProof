@@ -42,10 +42,16 @@ export const createPropertiesRouter = (db: Database.Database): Router => {
   router.get('/', (req, res) => {
     const landlordId = typeof req.query.landlordId === 'string' ? req.query.landlordId : undefined;
 
-    const rows = landlordId
-      ? db.prepare('SELECT * FROM properties WHERE landlord_id = ? ORDER BY created_at DESC').all(landlordId)
-      : db.prepare('SELECT * FROM properties ORDER BY created_at DESC').all();
+    const query = `
+      SELECT p.*, COUNT(rp.id) AS payment_count
+      FROM properties p
+      LEFT JOIN rent_payments rp ON rp.property_id = p.id
+      ${landlordId ? 'WHERE p.landlord_id = ?' : ''}
+      GROUP BY p.id
+      ORDER BY p.created_at DESC
+    `;
 
+    const rows = landlordId ? db.prepare(query).all(landlordId) : db.prepare(query).all();
     res.json(rows);
   });
 

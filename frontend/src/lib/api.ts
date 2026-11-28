@@ -29,6 +29,15 @@ export type Property = {
   currency: 'USDC' | 'XLM';
   dueDay: number;
 };
+export type PropertyWithPaymentCount = {
+  id: string;
+  property_code: string;
+  address: string;
+  rent_amount: string;
+  currency: 'USDC' | 'XLM';
+  due_day: number;
+  payment_count: number;
+};
 export type Tenant = { id: string; displayName: string };
 export type RentPayment = {
   transaction_hash: string;
@@ -50,6 +59,9 @@ export const api = {
     currency: 'USDC' | 'XLM';
     dueDay: number;
   }) => request<Property>('/api/properties', { method: 'POST', body: JSON.stringify(input) }),
+
+  listProperties: (landlordId: string) =>
+    request<PropertyWithPaymentCount[]>(`/api/properties?landlordId=${encodeURIComponent(landlordId)}`),
 
   createTenant: (displayName: string) =>
     request<Tenant>('/api/tenants', { method: 'POST', body: JSON.stringify({ displayName }) }),
