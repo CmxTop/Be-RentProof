@@ -61,4 +61,22 @@ export const api = {
     }),
 
   getProfile: (propertyCode: string) => request<ProfileResponse>(`/api/profile/${propertyCode}`),
+
+  buildPayment: (sourceAccount: string, propertyCode: string) =>
+    request<{ xdr: string; networkPassphrase: string }>('/api/payments/build', {
+      method: 'POST',
+      body: JSON.stringify({ sourceAccount, propertyCode }),
+    }),
+
+  submitPayment: (signedXdr: string) =>
+    request<{ transactionHash: string }>('/api/payments/submit', {
+      method: 'POST',
+      body: JSON.stringify({ signedXdr }),
+    }),
+
+  demoPay: (propertyCode: string) =>
+    request<{ transactionHash: string; demoAccount: string }>('/api/payments/demo-pay', {
+      method: 'POST',
+      body: JSON.stringify({ propertyCode }),
+    }),
 };

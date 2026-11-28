@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../lib/api';
+import { connectFreighter, signWithFreighter } from '../lib/stellar';
 
 export function TenantDashboard() {
   const [displayName, setDisplayName] = useState('');
@@ -9,6 +10,8 @@ export function TenantDashboard() {
   const [linkedCode, setLinkedCode] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [paying, setPaying] = useState(false);
+  const [paymentResult, setPaymentResult] = useState<string | null>(null);
 
   const handleLink = async (event: FormEvent) => {
     event.preventDefault();
@@ -26,15 +29,74 @@ export function TenantDashboard() {
     }
   };
 
+  const payWithFreighter = async () => {
+    if (!linkedCode) return;
+    setError(null);
+    setPaying(true);
+    try {
+      const address = await connectFreighter();
+      const { xdr, networkPassphrase } = await api.buildPayment(address, linkedCode);
+      const signedXdr = await signWithFreighter(xdr, networkPassphrase);
+      const { transactionHash } = await api.submitPayment(signedXdr);
+      setPaymentResult(transactionHash);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Payment failed');
+    } finally {
+      setPaying(false);
+    }
+  };
+
+  const payWithDemoAccount = async () => {
+    if (!linkedCode) return;
+    setError(null);
+    setPaying(true);
+    try {
+      const { transactionHash } = await api.demoPay(linkedCode);
+      setPaymentResult(transactionHash);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Demo payment failed');
+    } finally {
+      setPaying(false);
+    }
+  };
+
   if (linkedCode) {
     return (
       <section>
         <h1>Tenant Dashboard</h1>
         <p>You're linked to property {linkedCode}.</p>
-        <p>
-          Paying rent on Stellar and viewing your history is coming next — for now, check your{' '}
-          <Link to={`/profile/${linkedCode}`}>Rent History Profile</Link>.
-        </p>
+
+        {paymentResult ? (
+          <div>
+            <p>Payment submitted on Stellar Testnet.</p>
+            <p>
+              <a
+                href={`https://stellar.expert/explorer/testnet/tx/${paymentResult}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                View transaction
+              </a>
+            </p>
+            <p>
+              It may take a few seconds to show up on your{' '}
+              <Link to={`/profile/${linkedCode}`}>Rent History Profile</Link> while it's indexed.
+            </p>
+          </div>
+        ) : (
+          <div>
+            <button type="button" onClick={payWithFreighter} disabled={paying}>
+              {paying ? 'Paying…' : 'Pay rent with Freighter'}
+            </button>
+            <p>
+              Don't have Freighter installed?{' '}
+              <button type="button" onClick={payWithDemoAccount} disabled={paying}>
+                {paying ? 'Paying…' : 'Pay with a demo Testnet account'}
+              </button>
+            </p>
+          </div>
+        )}
+        {error && <p role="alert">{error}</p>}
       </section>
     );
   }
